@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" name="picField" id="picField" size="24" onchange="preview_2(this);" alt=""/>
+    <img src="" alt="" id="myImg">
+    <script>
+        document.getElementById('picField').onchange = function (evt) {
+        var tgt = evt.target || window.event.srcElement,
+        files = tgt.files;
+        var outImage = "myImg";
+        console.log(files);
+    // FileReader support
+    if (FileReader && files && files.length) {
+        var fr = new FileReader();
+        fr.onload = function () {
+            document.getElementById(outImage).src = fr.result;
+        }
+        fr.readAsDataURL(files[0]);
+    }
+
+    // Not supported
+    else {
+        // fallback -- perhaps submit the input to an iframe and temporarily store
+        // them on the server until the user's session ends.
+    }
+}
+    </script>
+</body>
+</html>
